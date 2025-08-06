@@ -807,7 +807,7 @@ function loop(eloop::ElasticLoop, journal, journal_task_callback, tsk_map, tsk_r
                 @debug "reduce channel, received pid=$pid (isbad=$isbad), making sure that it is initialized"
                 yield()
                 isbad && push!(bad_pids, pid)
-                @debug "reduce_channel, $pid is initialied, removing from used_pids"
+                @debug "reduce_channel, $pid is initialized, removing from used_pids"
                 pid ∈ eloop.used_pids_reduce && pop!(eloop.used_pids_reduce, pid)
                 @debug "reduce channel, done removing $pid from used_pids, used_pids=$(eloop.used_pids_reduce)"
             end
@@ -1041,7 +1041,7 @@ and `pmap_kwargs` are as follows.
 [1] The number of machines provisioned may be greater than the number of workers in the cluster since with
 some cluster managers, there may be a delay between the provisioining of a machine, and when it is added to the
 Julia cluster.
-[2] For example, on Azure Cloud a SPOT instance will be pre-empted if someone is willing to pay more for it
+[2] For example, on Azure Cloud a SPOT instance will be pre-emptied if someone is willing to pay more for it
 """
 function epmap(options::SchedulerOptions, f::Function, tasks, args...; kwargs...)
     eloop = ElasticLoop(Nothing, tasks, options; isreduce=false)
